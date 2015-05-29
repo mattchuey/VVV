@@ -2,8 +2,9 @@
 
 ## In Progress
 
-* ***New:*** Add support for Parallels as a provider. (#479)
 * MySQL: Enable `innodb_file_per_table`. (#537)
+* Add (https://github.com/leogopal/VVV-Dashboard) v1.2.0
+* Add provision-custom.sh to make changes / edits to provisioning script
 
 ## 1.2.0 (December 14, 2014)
 * VVV is now [MIT Licensed](https://github.com/Varying-Vagrant-Vagrants/VVV/blob/master/LICENSE).

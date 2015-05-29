@@ -16,43 +16,20 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
-  # Configuration options for the Parallels provider.
-  config.vm.provider :parallels do |v|
-    v.update_guest_tools = true
-    v.optimize_power_consumption = false
-    v.memory = 1024
-  end
-
-  # Configuration options for the VMware Fusion provider.
-  config.vm.provider :vmware_fusion do |v|
-    v.vmx["memsize"] = "1024"
-    v.vmx["numvcpus"] = "2"
-  end
-
   # SSH Agent Forwarding
   #
   # Enable agent forwarding on vagrant ssh commands. This allows you to use ssh keys
   # on your host machine inside the guest. See the manual for `ssh-add`.
   config.ssh.forward_agent = true
 
-  # Default Ubuntu Box
+  # Default Debian 8 "Jessie" Box (Vanilla)
   #
-  # This box is provided by Ubuntu vagrantcloud.com and is a nicely sized (332MB)
-  # box containing the Ubuntu 14.04 Trusty 64 bit release. Once this box is downloaded
-  # to your host computer, it is cached for future use under the specified box name.
-  config.vm.box = "ubuntu/trusty64"
+  # https://atlas.hashicorp.com/debian/boxes/jessie64
+  # Once this box is downloaded to your host computer, it is cached for future
+  # use under the specified box name.
+  config.vm.box = "debian/jessie64"
 
-  # The Parallels Provider uses a different naming scheme.
-  config.vm.provider :parallels do |v, override|
-    override.vm.box = "parallels/ubuntu-14.04"
-  end
-
-  # The VMware Fusion Provider uses a different naming scheme.
-  config.vm.provider :vmware_fusion do |v, override|
-    override.vm.box = "netsensia/ubuntu-trusty64"
-  end
-
-  config.vm.hostname = "vvv"
+  config.vm.hostname = "vvv-dj"
 
   # Local Machine Hosts
   #
@@ -153,14 +130,6 @@ Vagrant.configure("2") do |config|
       config.vm.synced_folder "database/data/", "/var/lib/mysql", :extra => 'dmode=777,fmode=777'
     end
 
-    # The Parallels Provider does not understand "dmode"/"fmode" in the "mount_options" as
-    # those are specific to Virtualbox. The folder is therefore overridden with one that
-    # uses corresponding Parallels mount options.
-    config.vm.provider :parallels do |v, override|
-      override.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => []
-    end
-  end
-
   # /srv/config/
   #
   # If a server-conf directory exists in the same directory as your Vagrantfile,
@@ -189,13 +158,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
     s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
-  end
-
-  # The Parallels Provider does not understand "dmode"/"fmode" in the "mount_options" as
-  # those are specific to Virtualbox. The folder is therefore overridden with one that
-  # uses corresponding Parallels mount options.
-  config.vm.provider :parallels do |v, override|
-    override.vm.synced_folder "www/", "/srv/www/", :owner => "www-data", :mount_options => []
   end
 
   # Customfile - POSSIBLY UNSTABLE

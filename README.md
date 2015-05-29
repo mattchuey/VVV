@@ -1,3 +1,11 @@
+# VVV Debian 8 (Jessie) vanilla box from Debian
+
+This is an ongoing side project of mine to get my exact production environment locally
+
+* Work in Progress
+
+################################################################################
+
 # Varying Vagrant Vagrants
 
 Varying Vagrant Vagrants is an open source [Vagrant](https://www.vagrantup.com) configuration focused on [WordPress](https://wordpress.org) development. VVV is [MIT Licensed](https://github.com/varying-vagrant-vagrants/vvv/blob/master/LICENSE).
