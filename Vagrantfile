@@ -129,6 +129,7 @@ Vagrant.configure("2") do |config|
     else
       config.vm.synced_folder "database/data/", "/var/lib/mysql", :extra => 'dmode=777,fmode=777'
     end
+  end
 
   # /srv/config/
   #
