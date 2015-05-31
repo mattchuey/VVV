@@ -1,8 +1,22 @@
 # VVV Debian 8 (Jessie) vanilla box from Debian
 
-This is an ongoing side project of mine to get my exact production environment locally
+This is an ongoing side project of mine to get VVV working with Debian 8, Nginx, HHVM, MariaDB 10, w/ PHP fallback
 
-* Work in Progress
+This point of this is to speed up Provisioning and Vagrant Up with VVV by removing npm and node.js because im not currently using them and they take forever
+
+This setup only takes around 534 seconds to Vagrant Up from scratch if you don't need to install the "Jessie" box (which doesn't take long) and provisions in under a minute
+
+This is what is currently working
+
+* Debian 8 "Jessie"
+* MariaDB 10 replacement for MySQL (Using Ubuntu 14.04 version - Debian 8 not available)
+* PHP5-FPM - No apache installed using Nginx
+* Nginx package for Jessie
+
+Next additions to make
+
+* Switch to HHVM w/ PHP5-FPM as a fallback by default
+* Clean up random error messages during vagrant up / provision pertaining to leftover npm and node script
 
 ################################################################################
 
