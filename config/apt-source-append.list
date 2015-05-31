@@ -2,9 +2,13 @@
 # versions of various packages that are installed
 
 # Provides Nginx mainline
-deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
-deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+deb http://nginx.org/packages/mainline/debian/ jessie nginx
+deb-src http://nginx.org/packages/mainline/debian/ jessie nginx
+
+# MariaDB 10.0 repository list - created 2015-05-30 20:01 UTC
+deb http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.0/ubuntu trusty main
+deb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.0/ubuntu trusty main
 
 # Provides Node.js
-deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
-deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
+#deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
+#deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
