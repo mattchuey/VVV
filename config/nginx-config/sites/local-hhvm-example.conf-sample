@@ -1,0 +1,7 @@
+server {
+    listen       80;
+    listen       443 ssl;
+    server_name  example.dev *.example.dev;
+    root         /srv/www/example/web;
+    include      /etc/nginx/hhvm-wp-subdirectory.conf;
+}
