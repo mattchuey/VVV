@@ -9,6 +9,9 @@ deb-src http://nginx.org/packages/mainline/debian/ jessie nginx
 deb http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.0/ubuntu trusty main
 deb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.0/ubuntu trusty main
 
+# Provides HHVM
+deb http://dl.hhvm.com/debian jessie main
+
 # Provides Node.js
 #deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
 #deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
