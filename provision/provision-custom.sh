@@ -163,6 +163,10 @@ if [[ $ping_result == "Connected" ]]; then
 		echo "Applying MariaDB signing key..."
 		apt-key adv --quiet --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 
+		# Retrieve the HHVM signing key
+		echo "Applying HHVM signing key..."
+		wget --quiet -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
+
 		# Apply the nodejs assigning key
 		#echo "Applying nodejs signing key..."
 		#apt-key adv --quiet --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C7917B12 2>&1 | grep "gpg:"
@@ -539,6 +543,28 @@ for SITE_CONFIG_FILE in $(find /srv/www -maxdepth 5 -name 'vvv-nginx.conf'); do
 	DIR="$(dirname $SITE_CONFIG_FILE)"
 	sed "s#{vvv_path_to_folder}#$DIR#" "$SITE_CONFIG_FILE" > /etc/nginx/custom-sites/"$DEST_CONFIG_FILE"
 done
+
+# Install and config HHVM if not installed
+if [[ -f /etc/hhvm/my-php.ini ]]; then
+	echo "HHVM already installed"
+else
+	echo "Installing HHVM"
+	sudo apt-get update
+	sudo apt-get install hhvm -y --force-yes
+	sudo chown vagrant /etc/hhvm
+
+	echo "Move HHVM my-php.ini"
+	cd /
+	sudo cp srv/config/hhvm-config/php.ini /etc/hhvm/my-php.ini
+	sudo hhvm -m daemon -c /etc/hhvm/my-php.ini -v Eval.EnableXHP=1
+	sudo update-rc.d hhvm defaults
+
+	echo "Restart nginx to apply HHVM changes"
+	sudo service nginx restart
+	sudo service hhvm restart
+
+	echo "Done Installing HHVM"
+fi
 
 # Parse any vvv-hosts file located in www/ or subdirectories of www/
 # for domains to be added to the virtual machine's host file so that it is
